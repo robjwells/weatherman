@@ -20,7 +20,7 @@ Sure! Just please don’t use our .php scraper, both out of courtesy and because
 There are a couple of things that are Morning Star specific.
 
 1. **The scraper**
-You’ll want to change this for something that spits out a file that plays nice with BBEdit/TextWrangler. The syntax (as of 06/09/2012) is:
+You’ll want to change this for something that spits out a file that plays nice with BBEdit/TextWrangler. The syntax (as of 06/09/2012) is:  
 	`cityName_condition=weatherCondition; `  
 	`cityName_temperature=theTemperature; `  
 So if your scraper puts out something different you’ll need to change the grep search in the `blaze` handler stored at the end of script.
