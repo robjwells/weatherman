@@ -32,6 +32,9 @@ Lines 14 & 15 exist to override master page elements from one of the Morning Sta
 
 If you’d like to get a feel for the evolution of the script, or just fancy a laugh at my expense, check out v1 and v2 of the script in the Vault folder.
 
+### Why can’t I read (most of the) `.applescript` files in Github’s web interface?
+It doesn’t seem to like multiple double-dash comment lines at the top of a script. It’s perfectly safe to click “Raw”, which will display plain text in your browser (that’s all `.applescript` files are).
+
 ### Licence
 Go nuts. Seriously. Drop me a line on Github if it helps you out.
 
