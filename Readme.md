@@ -5,8 +5,7 @@ A short little script to take the output from a web scraper, grep bits of inform
 In this case it’s pulling tomorrow’s weather forecasts for several British cities but there are a bunch of situations where you could use it.
 
 ## Instructions
-Assuming no changes to the code (hi Star people!):
-
+Assuming no changes to the code (hi Star people!):  
 1. Download Weather.app and put it somewhere safe (/Applications is fine).
 2. In InDesign, open the page you need to put tomorrow’s weather forecasts on.
 3. Run Weather.app
@@ -19,12 +18,12 @@ Sure! Just please don’t use our .php scraper, both out of courtesy and because
 ### Changing the code
 There are a couple of things that are Morning Star specific.
 
-1. **The scraper**
+1. **The scraper**  
 You’ll want to change this for something that spits out a file that plays nice with BBEdit/TextWrangler. The syntax (as of 06/09/2012) is:  
 	`cityName_condition=weatherCondition; `  
 	`cityName_temperature=theTemperature; `  
 So if your scraper puts out something different you’ll need to change the grep search in the `blaze` handler stored at the end of script.
-2. **InDesign specifics**
+2. **InDesign specifics**  
 Lines 14 & 15 exist to override master page elements from one of the Morning Star master pages, which you are almost certainly not using. The same goes for the "Weather" group and indeed the labelled text frames that the information gets placed into. All this will need to be changed to suit your particular situation.
 
 #### Why `blaze`?
