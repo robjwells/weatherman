@@ -6,6 +6,7 @@ In this case it’s pulling tomorrow’s weather forecasts for several British c
 
 ## Instructions
 Assuming no changes to the code (hi Star people!):
+
 1. Download Weather.app and put it somewhere safe (/Applications is fine).
 2. In InDesign, open the page you need to put tomorrow’s weather forecasts on.
 3. Run Weather.app
