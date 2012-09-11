@@ -61,14 +61,14 @@ for ($i=0; $i<=count($cities)-1; $i++)
 			
 			$output .= $city . "_condition=";
 		}
-	
+	
 
 	// Find weather conditions (Rain, cloudy, etc.)
 	$x=0;
 	$weatheroutput = array();
 	
 	foreach ($html->find('span[class=weather-type-image] img') as $weathertype)
-	{
+	{
 		if ($x==2)
 			{
 			$weathertypestring = $weathertype->alt;	
@@ -92,8 +92,8 @@ for ($i=0; $i<=count($cities)-1; $i++)
 			}
 	$y++;
 	}	
-
-}
+
+}
 
 //echo $output;
 
@@ -106,8 +106,8 @@ header("Content-Type: text/plain");
 header("Content-Transfer-Encoding: binary");
 
 // Read the file from disk
-readfile($file);
-
+readfile($file);
+
 }
 
 /* Backup of cities array for faster parsing when debugging */
@@ -128,6 +128,7 @@ $cities = array (
 );
 /* /Backup of cities array */
 
+
 fetchsummaries ($day);
-
+
 ?>
