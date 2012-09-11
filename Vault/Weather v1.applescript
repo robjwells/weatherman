@@ -1,6 +1,6 @@
 tell application "Finder"
 	set weather_file to ((the POSIX path of (path to desktop)) & (weekday of (current date)) & "_weather.txt")
-	do shell script "curl -L http://shop.morningstaronline.co.uk/offsite/weather/test/weather-app.php -o " & weather_file
+	do shell script "curl -L http://path/to/weather-app.php -o " & weather_file
 end tell
 
 tell application "TextWrangler"

@@ -4,6 +4,8 @@ A short little script to take the output from a web scraper, grep some data and 
 
 In this case it’s pulling tomorrow’s weather forecasts for several British cities but there are a bunch of situations where you could use it.
 
+Thanks to Jack Carr for providing the .php source.
+
 ## Instructions
 Assuming no changes to the code (hi Star people!):
 
@@ -14,26 +16,23 @@ Assuming no changes to the code (hi Star people!):
 5. Get on with your day.
 
 ## Can I use this with {x,y,z}?
-Sure! Just please don’t use our .php scraper, both out of courtesy and because it’ll be unreliable for whatever you’re doing.
+Sure! You’ll need somewhere to put the .php scraper if you want to use it as-is, though, and then put that address after `curl -L`.
 
 ### Changing the code
-There are a couple of things that are Morning Star specific.
+There are a couple of things in the AppleScript files that are Morning Star specific.
 
-1. **The scraper**  
-You’ll want to change this for something that spits out a file that plays nice with BBEdit/TextWrangler. The syntax is:  
-	`cityName_condition=weatherCondition; `  
-	`cityName_temperature=theTemperature; `  
-If your scraper does something different you’ll need to change the grep search in the `blaze` handler stored at the end of script.
-2. **InDesign specifics**  
-Lines 14 & 15 exist to override master page elements from one of the Morning Star master pages, which you are almost certainly not using. The same goes for the "Weather" group and indeed the labelled text frames that the information gets placed into. All this will need to be changed to suit your particular situation.
+1. **InDesign specifics**  
+Lines 14 & 15 exist to override master page elements from one of the Morning Star master pages, which you aren’t using. The same goes for the "Weather" group and indeed the labelled text frames that the information gets placed into. All this will need to be changed to suit your particular situation.
+2. **The scraper**
+If you want to adapt the scraper to do something slightly different, but don’t want to fiddle with the AppleScript too much, just make sure it still spits out a text file with the data arranged like this:
+	`variableName_dataType=theData; `  
+	`variableName_dataType=theData; `  
+For anything different you’ll have to change the grep search that the `blaze` handler performs.
 
 #### Why `blaze`?
 “I wonder if I can write a handler that’ll just blaze through all this stuff.”
 
 If you’d like to get a feel for the evolution of the script, or just fancy a laugh at my expense, check out v1 and v2 in the Vault folder.
-
-### Why can’t I read (most of the) .applescript files in Github’s web interface?
-It doesn’t seem to like multiple double-dash comment lines at the top of a script. It’s perfectly safe to click “Raw”, which will display plain text in your browser (that’s all .applescript files are).
 
 ### Licence
 Go nuts. Seriously. Drop me a line on Github if it helps you out.

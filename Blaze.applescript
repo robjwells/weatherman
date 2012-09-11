@@ -7,7 +7,7 @@ try
 end try
 
 set weatherFile to ((the POSIX path of (path to desktop)) & (weekday of (current date)) & "_weather.txt") -- Sets a location & file name to be used in the next line
-do shell script "curl -L http://shop.morningstaronline.co.uk/offsite/weather/test/weather-app.php -o " & weatherFile -- Saves the output of Jack’s PHP weather app
+do shell script "curl -L http://path/to/weather-app.php -o " & weatherFile -- Saves the output of Jack Carr’s weather-app.php
 
 tell application "Adobe InDesign CS5.5"
 	tell the front document
@@ -19,8 +19,8 @@ end tell
 tell application "TextWrangler"
 	open weatherFile
 	
-	replace "intervals" using "spells" searching in text 1 of text document 1 options {search mode:literal, starting at top:true}
-	replace "Newcastle upon Tyne" using "Newcastle" searching in text 1 of text document 1 options {search mode:literal, starting at top:true}
+	--	replace "intervals" using "spells" searching in text 1 of text document 1 options {search mode:literal, starting at top:true}
+	--	replace "Newcastle upon Tyne" using "Newcastle" searching in text 1 of text document 1 options {search mode:literal, starting at top:true}
 	
 	my blaze("Aberdeen") -- Finds and sets the information for Aberdeen
 	my blaze("Birmingham")

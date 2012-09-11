@@ -7,7 +7,7 @@ try
 end try
 
 set weatherFile to ((the POSIX path of (path to desktop)) & (weekday of (current date)) & "_weather.txt") -- Sets a location & file name to be used in the next line
-do shell script "curl -L http://shop.morningstaronline.co.uk/offsite/weather/test/weather-app.php -o " & weatherFile -- Saves the output of Jack’s PHP weather app
+do shell script "curl -L http://path/to/weather-app.php -o " & weatherFile -- Saves the output of Jack’s PHP weather app
 
 tell application "Adobe InDesign CS5.5"
 	tell the front document
