@@ -68,7 +68,7 @@ for ($i=0; $i<=count($cities)-1; $i++)
 	$weatheroutput = array();
 	
 	foreach ($html->find('span[class=weather-type-image] img') as $weathertype)
-	{
+	{
 		if ($x==2)
 			{
 			$weathertypestring = $weathertype->alt;	
