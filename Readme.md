@@ -24,10 +24,13 @@ There are a couple of things in the AppleScript files that are Morning Star spec
 1. **InDesign specifics**  
 Lines 14 & 15 exist to override master page elements from one of the Morning Star master pages, which you aren’t using. The same goes for the "Weather" group and indeed the labelled text frames that the information gets placed into. All this will need to be changed to suit your particular situation.
 2. **The scraper**
-If you want to adapt the scraper to do something slightly different, but don’t want to fiddle with the AppleScript too much, just make sure it still spits out a text file with the data arranged like this:
+If you want to adapt the scraper to do something slightly different, but don’t want to fiddle with the AppleScript too much, just make sure it still spits out a text file with the data arranged like this:  
 	`variableName_dataType=theData; `  
 	`variableName_dataType=theData; `  
 For anything different you’ll have to change the grep search that the `blaze` handler performs.
+
+#### Why does GitHub cut off the .php source half-way down?
+I don’t know.
 
 #### Why `blaze`?
 “I wonder if I can write a handler that’ll just blaze through all this stuff.”
