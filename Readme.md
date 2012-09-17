@@ -22,9 +22,9 @@ It is specifically designed to provide a simple weather forecast for [a newspape
 
 *	Set the `APIkey` variable on line 22 to your own key.
 *	The `override` block (lines 57-66) to reference your own
-	master pages, or just remove them outright if you’re not using masters.
+	master pages, or just remove it outright if you’re not using masters.
 *	The calls to the `newCity` handler (lines 31-43), using
-	whatever locations you want to get the forecasts for. See the [Met Office daily forecast API page][daily] to see how to call the location list with the 6-digit location codes.
+	whatever locations you want to get the forecasts for. See the [Met Office daily forecast API page][daily] to see how to call the location list that includes the 6-digit location codes.
 *	The `callAPI` handler. There’s a lot going on in there,
 	and it’s specific to the script’s original purpose of getting the maximum temperature and average conditions. This determines (a) the API calls, (b) the data pulled out of the API response and (c) the (slightly) custom condition names (see the `weatherTypes` list on line 25.) You’ll likely need to change any or all of these.  
 	*Special note:* If changing the API call, or if you want a different part of the response, note that lines 154 and 176 do more than just call the URL. The shell script also pretty-prints the response, which then allows an initial grep to isolate the desired line.
@@ -33,15 +33,15 @@ It is specifically designed to provide a simple weather forecast for [a newspape
 
 ### Be careful with `make_dateString()`
 
-Refactor or add to the code by all means, but the only part that is safe to cut entire are the repeats for Sundays. Specifically, removing (or breaking) the code to add leading zeroes will cause the API call to fail.
+Specifically, removing (or breaking) the code to add leading zeroes will cause the API call to fail January through September.
 
 ### Testing advice
 
-To keep things quick while testing, grab and store a typical API response that you want to process in a variable (see lines 155 and 177 for how I was doing this) and comment out the `do shell script` line. All the other work can be done in second or two, while each call to a Met Office URL takes anywhere from a third of a second to a full one.
+To keep things quick while testing, grab and set a variable to a typical API response that you want to process (see lines 155 and 177 for how I was doing this) and comment out the `do shell script` line. All the processing and setting work can be done in second or two, while each call to a Met Office URL takes anywhere from a third of a second to a whole one.
 
 ## What happened to the web scraper version?
 
-It’s sitting in [`Vault/v4`][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper. (Thanks to [Jack Carr][] for providing the source to that.)
+It’s sitting in [`Vault/v4`][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper, even if it is Apache on your local machine. Thanks to [Jack Carr][] for providing the scraper's PHP source.
 
 [v4]:	https://github.com/robjwells/weatherman/tree/master/Vault/v4
 [Jack Carr]:	http://twitter.com/funprofessional
