@@ -1,7 +1,7 @@
 (* Weatherman
 by Rob Wells
 
-An automatic weather script for the Morning Star.
+An automatic weather script for the Morning Star. 
 
 First written: 16/09/2012
 Last update: 17/09/2012
