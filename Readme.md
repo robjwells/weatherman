@@ -1,43 +1,55 @@
 # Weatherman
 
-A short little script to take the output from a web scraper, grep some data and then put it in the right place in an InDesign document.
+An AppleScript that calls the Met Office daily forecast API, strips out certain data, and then places it into an Adobe InDesign document.
 
-In this case it’s pulling tomorrow’s weather forecasts for several British cities but there are a bunch of situations where you could use it.
+It is specifically designed to provide a simple weather forecast for [a newspaper][mstar]. As is, the script calls for tomorrow’s weather data, pulls out the temperature and average conditions, and places it into specific, named text frames in InDesign. If tomorrow is Saturday then it will also fetch, process and set the weather information for Sunday. For a weekday it takes between 5-10 seconds from start to finish, and 10-20 seconds for Saturday & Sunday. (Most of this time is spent waiting for API responses.)
 
-Thanks to Jack Carr for providing the .php source.
+[mstar]:	http://www.morningstaronline.co.uk
 
-## Instructions
-Assuming no changes to the code (hi Star people!):
+## What you’ll need
 
-1. Download Weather.app and put it somewhere safe (/Applications is fine).
-2. In InDesign, open the page you need to put tomorrow’s weather forecasts on.
-3. Run Weather.app
-4. Wait about 10 seconds.
-5. Get on with your day.
+*	**A Met Office API key**  
+	Visit the [Met Office DataPoint][met] site and sign up for an account. Once you’ve done that you need to register (seemingly *again*) for DataPoint access. You’ll see a 36-character “application key” on [your account page][metacc] if you’ve done it right.
+*	**TextWrangler or BBEdit**  
+	For the great grep tools they expose through AppleScript. The script is set for TextWrangler but just do a find & replace if you use BBEdit instead. (It works fine.)
+*	**An InDesign document with labelled frames**  
+	Or named frames, for CS5 or later. As is, the script is looking for `cityName_temperature` and `cityName_condition`. The full names are set dynamically in the script using the `name` property of each `newCity(cityName,cityLocation)` you create, where `cityName` is the front part of the InDesign frame label and `cityLocation` is the Met Office’s location code.
 
-## Can I use this with {x,y,z}?
-Sure! You’ll need somewhere to put the .php scraper if you want to use it as-is, though, and then put that address after `curl -L`.
+[met]:	http://www.metoffice.gov.uk/datapoint
+[metacc]:	https://logon.metoffice.gov.uk/Login
 
-### Changing the code
-There are a couple of things in the AppleScript files that are Morning Star specific.
+## What to change
 
-1. **InDesign specifics**  
-Lines 14 & 15 exist to override master page elements from one of the Morning Star master pages, which you aren’t using. The same goes for the "Weather" group and indeed the labelled text frames that the information gets placed into. All this will need to be changed to suit your particular situation.
-2. **The scraper**
-If you want to adapt the scraper to do something slightly different, but don’t want to fiddle with the AppleScript too much, just make sure it still spits out a text file with the data arranged like this:  
-	`variableName_dataType=theData; `  
-	`variableName_dataType=theData; `  
-For anything different you’ll have to change the grep search that the `blaze` handler performs.
+*	Set the `APIkey` variable on line 22 to your own key.
+*	The `override` block (lines 57-66) to reference your own
+	master pages, or just remove them outright if you’re not using masters.
+*	The calls to the `newCity` handler (lines 31-43), using
+	whatever locations you want to get the forecasts for. See the [Met Office daily forecast API page][daily] to see how to call the location list with the 6-digit location codes.
+*	The `callAPI` handler. There’s a lot going on in there,
+	and it’s specific to the script’s original purpose of getting the maximum temperature and average conditions. This determines (a) the API calls, (b) the data pulled out of the API response and (c) the (slightly) custom condition names (see the `weatherTypes` list on line 25.) You’ll likely need to change any or all of these.  
+	*Special note:* If changing the API call, or if you want a different part of the response, note that lines 154 and 176 do more than just call the URL. The shell script also pretty-prints the response, which then allows an initial grep to isolate the desired line.
+	
+[daily]:	http://www.metoffice.gov.uk/datapoint/product/uk-daily-site-specific-forecast
 
-#### Why does GitHub cut off the .php source half-way down?
-I don’t know.
+### Be careful with `make_dateString()`
 
-#### Why `blaze`?
-“I wonder if I can write a handler that’ll just blaze through all this stuff.”
+Refactor or add to the code by all means, but the only part that is safe to cut entire are the repeats for Sundays. Specifically, removing (or breaking) the code to add leading zeroes will cause the API call to fail.
 
-If you’d like to get a feel for the evolution of the script, or just fancy a laugh at my expense, check out v1 and v2 in the Vault folder.
+### Testing advice
 
-### Licence
-Go nuts. Seriously. Drop me a line on Github if it helps you out.
+To keep things quick while testing, grab and store a typical API response that you want to process in a variable (see lines 155 and 177 for how I was doing this) and comment out the `do shell script` line. All the other work can be done in second or two, while each call to a Met Office URL takes anywhere from a third of a second to a full one.
 
-The “Cloud” symbol (Cloud.icns) is by Adam Whitcroft, from [The Noun Project](http://thenounproject.com). I sloppily added a stroke in Photoshop to stop it from disappearing in the Finder when used as the .app’s icon.
+## What happened to the web scraper version?
+
+It’s sitting in [`Vault/v4`][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper. (Thanks to [Jack Carr][] for providing the source to that.)
+
+[v4]:	https://github.com/robjwells/weatherman/tree/master/Vault/v4
+[Jack Carr]:	http://twitter.com/funprofessional
+
+## Licence
+You can do what you like with the AppleScript. Have fun, and drop me a line on GitHub if it helps you out.
+
+The Met Office have their own restrictions on [how you use the data][metdata] and [their API][metterms].
+
+[metdata]:	http://www.metoffice.gov.uk/datapoint/support/terms-conditions
+[metterms]:	http://www.metoffice.gov.uk/about-us/legal/fair-usage
