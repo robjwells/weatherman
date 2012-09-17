@@ -41,9 +41,9 @@ To keep things quick while testing, grab and set a variable to a typical API res
 
 ## What happened to the web scraper version?
 
-It’s sitting in [`Vault/v4`][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper, even if it is Apache on your local machine. Thanks to [Jack Carr][] for providing the scraper's PHP source.
+It’s sitting in [Vault/v4][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper, even if it is Apache on your local machine. Thanks to [Jack Carr][] for providing the scraper's PHP source.
 
-[v4]:	https://github.com/robjwells/weatherman/tree/master/Vault/v4
+[v4]:	https://github.com/robjwells/weatherman/tree/master/Vault/v4%20(scraper)
 [Jack Carr]:	http://twitter.com/funprofessional
 
 ## Licence
