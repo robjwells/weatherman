@@ -4,7 +4,7 @@ An AppleScript that calls the Met Office daily forecast API, strips out certain 
 
 It is specifically designed to provide a simple weather forecast for [a newspaper][mstar]. As is, the script calls for tomorrow’s weather data, pulls out the temperature and average conditions, and places it into specific, named text frames in InDesign. If tomorrow is Saturday then it will also fetch, process and set the weather information for Sunday. For a weekday it takes between 5-10 seconds from start to finish, and 10-20 seconds for Saturday & Sunday. (Most of this time is spent waiting for API responses.)
 
-[mstar]:	http://www.morningstaronline.co.uk
+[mstar]: http://www.morningstaronline.co.uk
 
 ## What you’ll need
 
@@ -15,8 +15,8 @@ It is specifically designed to provide a simple weather forecast for [a newspape
 *	**An InDesign document with labelled frames**  
 	Or named frames, for CS5 or later. As is, the script is looking for `cityName_temperature` and `cityName_condition`. The full names are set dynamically in the script using the `name` property of each `newCity(cityName,cityLocation)` you create, where `cityName` is the front part of the InDesign frame label and `cityLocation` is the Met Office’s location code.
 
-[met]:	http://www.metoffice.gov.uk/datapoint
-[metacc]:	https://logon.metoffice.gov.uk/Login
+[met]: http://www.metoffice.gov.uk/datapoint
+[metacc]: https://logon.metoffice.gov.uk/Login
 
 ## What to change
 
@@ -29,7 +29,7 @@ It is specifically designed to provide a simple weather forecast for [a newspape
 	and it’s specific to the script’s original purpose of getting the maximum temperature and average conditions. This determines (a) the API calls, (b) the data pulled out of the API response and (c) the (slightly) custom condition names (see the `weatherTypes` list on line 25.) You’ll likely need to change any or all of these.  
 	*Special note:* If changing the API call, or if you want a different part of the response, note that lines 154 and 176 do more than just call the URL. The shell script also pretty-prints the response, which then allows an initial grep to isolate the desired line.
 	
-[daily]:	http://www.metoffice.gov.uk/datapoint/product/uk-daily-site-specific-forecast
+[daily]: http://www.metoffice.gov.uk/datapoint/product/uk-daily-site-specific-forecast
 
 ### Be careful with `make_dateString()`
 
@@ -43,13 +43,13 @@ To keep things quick while testing, grab and set a variable to a typical API res
 
 It’s sitting in [Vault/v4][v4], in case anyone wants to use that method instead. I’d recommend against it because it (a) relies on the BBC not changing their website’s weather pages and (b) requires you to have something to host & run the PHP scraper, even if it is Apache on your local machine. Thanks to [Jack Carr][] for providing the scraper's PHP source.
 
-[v4]:	https://github.com/robjwells/weatherman/tree/master/Vault/v4%20(scraper)
-[Jack Carr]:	http://twitter.com/funprofessional
+[v4]: https://github.com/robjwells/weatherman/tree/master/Vault/v4%20(scraper)
+[Jack Carr]: http://twitter.com/funprofessional
 
 ## Licence
 You can do what you like with the AppleScript. Have fun, and drop me a line on GitHub if it helps you out.
 
 The Met Office have their own restrictions on [how you use the data][metdata] and [their API][metterms].
 
-[metdata]:	http://www.metoffice.gov.uk/datapoint/support/terms-conditions
-[metterms]:	http://www.metoffice.gov.uk/about-us/legal/fair-usage
+[metdata]: http://www.metoffice.gov.uk/datapoint/support/terms-conditions
+[metterms]: http://www.metoffice.gov.uk/about-us/legal/fair-usage
