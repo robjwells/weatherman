@@ -157,9 +157,9 @@ on callAPI(city)
 		tell the front text window
 			set the contents to XML -- Data from API call, after terminal grep and clean-up
 			find grepPattern searching in text 1 of text document 1 options {search mode:grep, starting at top:true, case sensitive:false} without selecting match -- Searches for previously defined grep pattern
-			set city's theTemp to grep substitution of "\\1" -- Gets temperature from grepPattern's first (pattern). "Max n¡C" set in InDesign handler
+			set city's theTemp to grep substitution of "\\1" -- Gets temperature from grepPattern's first (pattern). "Max nÂ°C" set in InDesign handler
 			if (grep substitution of "\\2") is "NA" then -- The only Met Office "weather type" without a number prefix (and so can't be fetched easily from a list)
-				if button returned of (display dialog "The Met Office says " & city's name & "'s weather condition is \"not available\"." & return & return & Â
+				if button returned of (display dialog "The Met Office says " & city's name & "'s weather condition is \"not available\"." & return & return & Â¬
 					"Do you want to continue or stop?" buttons {"Continue", "Stop the script"} default button 2 with icon caution) is "Stop the script" then -- Prompt to stop if weather type is "NA"
 					close saving no
 					error number -128
@@ -181,7 +181,7 @@ on callAPI(city)
 				find grepPattern searching in text 1 of text document 1 options {search mode:grep, starting at top:true, case sensitive:false} without selecting match
 				set city's sunTemp to grep substitution of "\\1"
 				if (grep substitution of "\\2") is "NA" then
-					if button returned of (display dialog "The Met Office says " & city's name & "'s weather condition is \"not available\" for Sunday." & return & return & Â
+					if button returned of (display dialog "The Met Office says " & city's name & "'s weather condition is \"not available\" for Sunday." & return & return & Â¬
 						"Do you want to continue or stop?" buttons {"Continue", "Stop the script"} default button 2 with icon caution) is "Stop the script" then -- Message makes clear that the problem is with Sunday's data
 						close saving no
 						error number -128
@@ -209,7 +209,7 @@ on setWeather(city)
 	tell application "Adobe InDesign CS5.5"
 		tell the front document
 			set the contents of text frame conditionBox to (city's theCondition) -- Puts the weather condition in the appropriate box for the specified city
-			set the contents of text frame tempBox to ("max " & city's theTemp & "¡C") -- Same for temperature
+			set the contents of text frame tempBox to ("max " & city's theTemp & "Â°C") -- Same for temperature
 		end tell
 	end tell
 	
@@ -220,7 +220,7 @@ on setWeather(city)
 		tell application "Adobe InDesign CS5.5"
 			tell the front document
 				set the contents of text frame Sun_conditionBox to (city's sunCondition) -- Puts the Sunday condition in the city's Sunday box
-				set the contents of text frame Sun_tempBox to ("max " & city's sunTemp & "¡C")
+				set the contents of text frame Sun_tempBox to ("max " & city's sunTemp & "Â°C")
 			end tell
 		end tell
 	end if
