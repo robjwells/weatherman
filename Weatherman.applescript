@@ -5,7 +5,7 @@
 --	Last updated			22/01/2013
 --	Version:			2.2
 
---	This fetches tomorrow’s weather forecasts and temperatures from the
+--	This fetches tomorrow's weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
 
 property APIkey : "Your Met Office API key here"
@@ -147,7 +147,7 @@ on callAPI(cityList, dateObject)
 			set message to message & "." & return & return & "Do you want to continue or stop?"
 			
 			if button returned of (display dialog message buttons {"Continue", "Stop the script"} default button 2 with icon caution) is "Stop the script" then
-				close saving no
+				tell application "TextWrangler" to close saving no
 				error number -128
 			else
 				set city's sunCondition to "Not available"
@@ -194,7 +194,7 @@ on callAPI(cityList, dateObject)
 end callAPI
 
 
--- Prep page for setting, call setWeather function
+-- Prep the page and set the weather
 on setWeather(cityList, indesignObject, weekendWeather)
 	tell application "Adobe InDesign CS5.5"
 		tell the front document
