@@ -3,7 +3,7 @@
 --	Written by			Rob Wells
 --	Created on			16/09/2012
 --	Last updated			22/01/2013
---	Version:				2.2
+--	Version:			2.2
 
 --	This fetches tomorrow’s weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
@@ -172,7 +172,6 @@ on callAPI(cityList, dateObject)
 			end tell
 			
 			if dateObject's weekendWeather is true then -- Same as above, just for Sunday
-				set Sun_dateString to item 3 of dateObject
 				set XML to buildCall(city's location, dateObject's Sun_dateString)
 				tell application "TextWrangler"
 					tell the front text window
