@@ -8,7 +8,7 @@
 --	This fetches tomorrow's weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
 
-property APIkey : "0ff2c7bc-36a8-49b7-ac7a-935eab02c27b"
+property APIkey : "Your Met Office DataPoint API key here"
 
 
 -- "Live" script --
