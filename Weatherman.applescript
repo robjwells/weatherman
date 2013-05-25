@@ -1,9 +1,9 @@
 --	Weatherman: Morning Star automatic weather layout
 
 --	Written by			Rob Wells
---	Created on			16/09/2012
---	Last updated			22/01/2013
---	Version:			2.2
+--	Created on			2012-09-16
+--	Last updated			2013-05-25
+--	Version:			2.21
 
 --	This fetches tomorrow's weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
