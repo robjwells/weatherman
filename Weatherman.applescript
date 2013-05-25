@@ -8,7 +8,7 @@
 --	This fetches tomorrow's weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
 
-property APIkey : "Your Met Office API key here"
+property APIkey : "0ff2c7bc-36a8-49b7-ac7a-935eab02c27b"
 
 
 -- "Live" script --
@@ -161,7 +161,7 @@ on callAPI(cityList, dateObject)
 				tell the front text window
 					set the contents to XML -- Data from API call, after terminal grep and clean-up
 					find grepPattern searching in text 1 of text document 1 options {search mode:grep, starting at top:true, case sensitive:false} without selecting match -- Searches for previously defined grep pattern
-					set city's theTemp to grep substitution of "\\1" -- Gets temperature from grepPattern's first (pattern). "Max n¡C" set in InDesign handler
+					set city's theTemp to grep substitution of "\\1" -- Gets temperature from grepPattern's first (pattern). "Max nÂ°C" set in InDesign handler
 					if (grep substitution of "\\2") is "NA" then -- The only Met Office "weather type" without a number prefix (and so can't be fetched easily from a list)
 						noData(city, false)
 					else
@@ -199,8 +199,18 @@ on setWeather(cityList, indesignObject, weekendWeather)
 	tell application "Adobe InDesign CS5.5"
 		tell the front document
 			
-			override group "Weather" of master spread (indesignObject's master) destination page page (indesignObject's dest)
-			ungroup group "Weather" -- Ungroups the frames, so they can be accessed individually
+			-- Check and warn if some idiot has already overridden or ungrouped the frame or is using an old page
+			try
+				override group "Weather" of master spread (indesignObject's master) destination page page (indesignObject's dest)
+			on error
+				my displayWarning("overridden", "override")
+			end try
+			
+			try
+				ungroup group "Weather" -- Ungroups the frames, so they can be accessed individually
+			on error
+				my displayWarning("ungrouped", "ungroup")
+			end try
 			
 			repeat with city in cityList
 				set tempBox to (city's name & "_temperature") -- So we can address the frames for each city
@@ -209,7 +219,7 @@ on setWeather(cityList, indesignObject, weekendWeather)
 				tell application "Adobe InDesign CS5.5"
 					tell the front document
 						set the contents of text frame conditionBox to (city's theCondition) -- Puts the weather condition in the appropriate box for the specified city
-						set the contents of text frame tempBox to ("max " & city's theTemp & "¡C") -- Same for temperature
+						set the contents of text frame tempBox to ("max " & city's theTemp & "Â°C") -- Same for temperature
 					end tell
 				end tell
 				
@@ -220,7 +230,7 @@ on setWeather(cityList, indesignObject, weekendWeather)
 					tell application "Adobe InDesign CS5.5"
 						tell the front document
 							set the contents of text frame Sun_conditionBox to (city's sunCondition) -- Puts the Sunday condition in the city's Sunday box
-							set the contents of text frame Sun_tempBox to ("max " & city's sunTemp & "¡C")
+							set the contents of text frame Sun_tempBox to ("max " & city's sunTemp & "Â°C")
 						end tell
 					end tell
 				end if
@@ -229,3 +239,11 @@ on setWeather(cityList, indesignObject, weekendWeather)
 		end tell
 	end tell
 end setWeather
+
+-- Warn if the weather group has been overridden or ungrouped already
+on displayWarning(firstWord, secondWord)
+	tell application "Adobe InDesign CS5.5"
+		set msg to "The weather group, containing the condition and temperature frames, has already been " & firstWord & "." & return & return & "Please do not manually " & secondWord & " this group from the master." & return & return & "If this is because this page is a copy of an old one, please NEVER copy old pages and instead generate fresh ones."
+		display alert msg as warning
+	end tell
+end displayWarning
