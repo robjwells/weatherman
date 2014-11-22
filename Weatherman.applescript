@@ -2,8 +2,8 @@
 
 --	Written by			Rob Wells
 --	Created on			2012-09-16
---	Last updated			2013-05-25
---	Version:			2.21
+--	Last updated		2014-11-22
+--	Version:			2.22
 
 --	This fetches tomorrow's weather forecasts and temperatures from the
 --	Met Office API and places them in frames in the front InDesign document.
@@ -39,11 +39,6 @@ on indesignCheck()
 			on error
 				set masterName to "NO_MASTER_APPLIED"
 			end try
-			
-			if masterName is not in weather_pages then
-				display alert "The front InDesign document is not a weather page. The script will now exit."
-				error number -128
-			end if
 			
 			return {master:("Feat-" & masterName), dest:destPage}
 		end tell
@@ -202,14 +197,10 @@ on setWeather(cityList, indesignObject, weekendWeather)
 			-- Check and warn if some idiot has already overridden or ungrouped the frame or is using an old page
 			try
 				override group "Weather" of master spread (indesignObject's master) destination page page (indesignObject's dest)
-			on error
-				my displayWarning("overridden", "override")
 			end try
 			
 			try
 				ungroup group "Weather" -- Ungroups the frames, so they can be accessed individually
-			on error
-				my displayWarning("ungrouped", "ungroup")
 			end try
 			
 			repeat with city in cityList
@@ -239,11 +230,3 @@ on setWeather(cityList, indesignObject, weekendWeather)
 		end tell
 	end tell
 end setWeather
-
--- Warn if the weather group has been overridden or ungrouped already
-on displayWarning(firstWord, secondWord)
-	tell application "Adobe InDesign CS5.5"
-		set msg to "The weather group, containing the condition and temperature frames, has already been " & firstWord & "." & return & return & "Please do not manually " & secondWord & " this group from the master." & return & return & "If this is because this page is a copy of an old one, please NEVER copy old pages and instead generate fresh ones."
-		display alert msg as warning
-	end tell
-end displayWarning
